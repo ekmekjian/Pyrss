@@ -16,6 +16,7 @@ class NODE:
 class feed:
   def __init__(self):
     self.head = None
+      
 # Functions:
 # Read sources from txt file
 with open(filename,"r") as f:
@@ -27,6 +28,12 @@ def displayFeed():
   start = feed()
   if start.head == None:
     #start list
+    # Go through each source to fill feed
+    for k in sources:
+      e = feedparser.parse(k)
+      for e in range(len(k.entries)):
+         k.entries[e]
+         
   else:
     # go through list check for existing articles
     # if article is not in list add to list
@@ -35,7 +42,8 @@ def displayFeed():
 if len(sys.argv) >1:
    writer = open(filename,"w")
    writer.write(sys.argv[1])
-   # add link to list
+   writer.close()
+   
    
 while uInput !='q':
   displayFeed()
