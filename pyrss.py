@@ -1,4 +1,4 @@
-i mport feedparser
+import feedparser
 import time
 import sys
 
