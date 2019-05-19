@@ -4,7 +4,7 @@ import sys
 
 filename = "source.txt"
 class NODE:
-   def __init__(self, title, link, pubDate, desc):
+  def FillNode(feedArticle):
     self.title = title
     self.link = link
     self.pubDate = pubDate
@@ -26,7 +26,8 @@ def createFeed(sources,head):
     for k in sources:
       e = feedparser.parse(k)
       for e in range(len(k.entries)):
-         addArticle(k.entries[e],start)
+         start.FillNode(k.entries[e])
+         
  # else:
     # go through list check for existing articles
     # if article is not in list add to list
@@ -35,6 +36,7 @@ def createFeed(sources,head):
 # Check periodically for old articles
 def displayFeed(head):
     display = head
+    createFeed(filename,display)
     while display.next != Null:
         for i in range(len(display.entries)):
             print display.title
