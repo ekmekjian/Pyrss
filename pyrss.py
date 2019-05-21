@@ -4,6 +4,13 @@ import sys
 
 filename = "source.txt"
 class NODE:
+  def __init__(self,title=None,link=None,pubDate=None,desc=None,id=None,next=None):
+    self.title = title
+    self.link=link
+    self.pubDate = pubDate
+    self.desc = desc
+    self.id = id
+    self.next = next
   def FillNode(self,eedArticle):
     self.title = feedArticle.title
     self.link = feedArticle.link
@@ -14,7 +21,7 @@ class NODE:
 
 # Functions:
 def checkList(list,article):
-  while(list.next != none):
+  while(list.next != None):
     if(list.id == articl.id):
       return False
   return True
@@ -25,16 +32,20 @@ def addToList(item,list):
   list.next = item
 
 # Read sources from txt file
-def gatherSources(source):
+def gatherSources():
+  source =[]
   with open(filename,"r") as f:
      for line in f:
         source.append(line)
-  return sour     
+  return source     
+
+
 
 # Go through each source to fill feed
-def createFeed(sources,head):
+def createFeed():
   start = NODE()
   add = NODE()
+  sources = gatherSources()
   if start == None:
     #start list    
     for k in sources:
@@ -50,13 +61,16 @@ def createFeed(sources,head):
     # if article is not in list add to list
         if(found==False):
           add.FillNode(e.entries[i])
+          addToList(add,start) 
+  return start
+
+
+
+def displayFeed():
+    display = NODE()
+    display = createFeed()
     # display list format: title:desc:pubdate  
-  
-# Check periodically for old articles
-def displayFeed(head):
-    display = head
-    createFeed(filename,display)
-    while display.next != Null:
+    while display.next != None:
         for i in range(len(display.entries)):
             print display.title
             print display.desc
@@ -69,9 +83,7 @@ if len(sys.argv) >1:
    writer.write(sys.argv[1])
    writer.close()
     
-uInput = 'a'
-start = NODE()
-while uInput !='q':
-  displayFeed(start)
-  uInput = input()    
+ 
+ 
+displayFeed()
   
