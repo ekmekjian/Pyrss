@@ -4,8 +4,9 @@
 # 1) Create a main loop for the program - done
 # 2) Utilize the time function to update feed - done
 # 3) Test with more sources - done
-# 4) Create check methods to allow for more arguments
-#    A) Allow the ability to add sources through argument - to be tested
+# 4) Create check methods to allow for more arguments-done
+#    A) Allow the ability to add sources through argument - to be tested-done
+# Project marked completed 6/10/2019
 
 import feedparser
 import time
@@ -35,7 +36,7 @@ def displayFeed(sources):
   for url in sources:
     e  = feedparser.parse(url)
     for article in range(len(e)):
-      print Fore.RED+Style.NORMAL+e.entries[article].title
+      print Fore.WHITE+Style.NORMAL+e.entries[article].title
       print "--"
       print Fore.BLUE+Style.NORMAL+e.entries[article].description
       print "--"
