@@ -1,4 +1,4 @@
-!#/usr/bin/env python
+#!/usr/bin/env python
 
 # Next steps:
 # 1) Create a main loop for the program - done
