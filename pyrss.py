@@ -8,42 +8,26 @@
 #    A) Allow the ability to add sources through argument - to be tested-done
 # Project marked completed 6/10/2019
 # Next steps:
-# 1) Allow for user intput while program runs for the following;
-#      pressing 'q' for quitting
-#      pressing 's' to search for titles for keywords
-#      pressing 'r' to reload feed
+#pressing 's' to search for titles for keywords
 import threading
 import sys
 import os
+import feedparser,colorama
 import feeds
 filename = "source.txt"
-#adding one or more source to source.txt
 
-def userinput(choice):
-    choice = input('>')
-    return choice    
-
- #Check for tags from argument
- #if S iniate search feed
-     #searches for title that matches keyword
+flag=''
 if len(sys.argv) >1:
-  feeds.enterSource(sys.argv,filename)    
+  flag = sys.argv[1]
+  if(flag=='-s'):
+     keyword=sys.argv[2:]
+  if(flag=='-a'):
+    feeds.enterSource(sys.argv[2],filename)    
 
-feed = gatherSources(filename)
+feed =feeds.gatherSources(filename)
  
  #Redo main loop
 def mainLoop():
-    #check for userinput during script running
-    #if s initate searchloop
-    #if r refresh feed
-    #if q quit the program
-    choice=''
-    while choice != 'q':
-        if(choice=='s'):
-            feeds.search(input('Enter keyword: '),filename)
-        inputthread=thread.start_new_thread(target=userinput,(choice,))
-        inputthread.daemon=True 
-        feedloop()
-        inputthread.start()
-    sys.exit()
+  feeds.feedloop(flag,)
 mainLoop()
+

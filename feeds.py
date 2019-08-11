@@ -26,36 +26,48 @@ def gatherSources(filename):
 def search(keyword,sources):
   for url in sources:
     e  = feedparser.parse(url)
+  while True:
     for article in range(len(e)):
-        print Fore.WHITE+Style.NORMAL+e.entries[article].title
-        print "--"
-        print Fore.BLUE+Style.NORMAL+e.entries[article].description
-        print "--"
-        print Style.DIM+e.entries[article].published
-        print "--"
-        print e.entries[article].link
-        print "--------------------------------------------------------------------------------"
-
-def displayFeed(sources):
+        if(keyword in e.entries[article].title):
+          print("\n"*25)
+          print(" "*50+"|")
+          print(" "*50+"v")
+          print("\n"+" "*45+"Scroll Down")
+          print("\n"*10)
+          os.system('clear')
+          print (Fore.WHITE+Style.NORMAL,e.entries[article].title)
+          print ("--")
+          print (Fore.BLUE+Style.NORMAL,e.entries[article].description)
+          print ("--")
+          print (Style.DIM,e.entries[article].published)
+          print ("--")
+          print (e.entries[article].link)
+          print ("--------------------------------------------------------------------------------")
+    print("End of results")
+    time.sleep(360)
+def displayloop(sources):
   for url in sources:
     e  = feedparser.parse(url)
-    for article in range(len(e)):
-        print Fore.WHITE+Style.NORMAL+e.entries[article].title
-        print "--"
-        print Fore.BLUE+Style.NORMAL+e.entries[article].description
-        print "--"
-        print Style.DIM+e.entries[article].published
-        print "--"
-        print e.entries[article].link
-        print "--------------------------------------------------------------------------------"
-  
-def feedloop():
   while True:
-        print("\n"*25)
-        print(" "*50+"|")
-        print(" "*50+"v")
-        print("n"+" "*45+"Scroll Down")
-        print("\n"*10)
-        os.system('clear')
-        displayFeed(feed)
-        time.sleep(360)
+    print("\n"*25)
+    print(" "*50+"|")
+    print(" "*50+"v")
+    print("\n"+" "*45+"Scroll Down")
+    print("\n"*10)
+    os.system('clear')
+    for article in range(len(e)):
+          print (Fore.WHITE+Style.NORMAL,e.entries[article].title)
+          print ("--")
+          print (Fore.BLUE+Style.NORMAL,e.entries[article].description)
+          print ("--")
+          print (Style.DIM,e.entries[article].published)
+          print ("--")
+          print (e.entries[article].link)
+          print ("--------------------------------------------------------------------------------")
+    time.sleep(360)
+def feedloop(flag,feed,keyword=None):
+  if keyword == None:
+    displayloop(feed)
+  else:
+    search(keyword,feed)
+ 
