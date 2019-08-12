@@ -9,13 +9,10 @@
 # Project marked completed 6/10/2019
 # Next steps:
 #pressing 's' to search for titles for keywords
-import threading
-import sys
-import os
-import feedparser,colorama
+import threading,sys,os,time,feedparser,colorama
 import feeds
 filename = "source.txt"
-
+keyword = None
 flag=''
 if len(sys.argv) >1:
   flag = sys.argv[1]
@@ -25,9 +22,20 @@ if len(sys.argv) >1:
     feeds.enterSource(sys.argv[2],filename)    
 
 feed =feeds.gatherSources(filename)
- 
+choice = ''
  #Redo main loop
 def mainLoop():
-  feeds.feedloop(flag,)
+  choice=''
+  while choice !='q':
+    if(keyword == None):
+       fthread=threading.Thread(target=feeds.feedloop,args=(flag,feed,))
+       fthread.daemon=True
+       fthread.start()
+    else:
+       fthread=threading.Thread(target=feeds.feedloop,args=(flag,feed,keyword,))
+       fthread.daemon=True
+       fthread.start()
+    time.sleep(1)
+    choice=input('>')
 mainLoop()
 

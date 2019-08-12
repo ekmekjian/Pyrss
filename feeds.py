@@ -64,7 +64,7 @@ def displayloop(sources):
           print ("--")
           print (e.entries[article].link)
           print ("--------------------------------------------------------------------------------")
-    time.sleep(360)
+    time.sleep(5)
 def feedloop(flag,feed,keyword=None):
   if keyword == None:
     displayloop(feed)
