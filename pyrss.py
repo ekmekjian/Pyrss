@@ -9,11 +9,19 @@
 # Project marked completed 6/10/2019
 # Next steps:
 #pressing 's' to search for titles for keywords
-import threading,sys,os,time,feedparser,colorama
+import threading,sys,select,os,time,feedparser,colorama
 import feeds
 filename = "source.txt"
 keyword = None
 flag=''
+def inputtimer(prompt,timeout):
+    sys.stdout.write(prompt)
+    sys.write.flush()
+    ready,_,_=select.select([sys.stdin],[],[],timeout)
+    if ready:
+        return sys.stdin.readline().rstrip('\n')
+    else:
+        return None
 if len(sys.argv) >1:
   flag = sys.argv[1]
   if(flag=='-s'):
@@ -27,15 +35,18 @@ choice = ''
 def mainLoop():
   choice=''
   while choice !='q':
+    if choice == '-s':
+        flag = choice[0]
+        keyword = choice[1:]
     if(keyword == None):
-       fthread=threading.Thread(target=feeds.feedloop,args=(flag,feed,))
-       fthread.daemon=True
-       fthread.start()
+        fthread=threading.Thread(target=feeds.feedloop,args=(flag,feed,))
+        fthread.daemon=True
+        fthread.start()
     else:
-       fthread=threading.Thread(target=feeds.feedloop,args=(flag,feed,keyword,))
-       fthread.daemon=True
-       fthread.start()
+        fthread=threading.Thread(target=feeds.feedloop,args=(flag,feed,keyword,))
+        fthread.daemon=True
+        fthread.start()
     time.sleep(1)
-    choice=input('>')
+    choice=input('>').split()
 mainLoop()
 
