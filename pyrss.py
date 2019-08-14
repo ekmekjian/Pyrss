@@ -16,10 +16,10 @@ keyword = None
 flag=''
 def inputtimer(prompt,timeout):
     sys.stdout.write(prompt)
-    sys.write.flush()
+    sys.stdout.flush()
     ready,_,_=select.select([sys.stdin],[],[],timeout)
     if ready:
-        return sys.stdin.readline().rstrip('\n')
+        return sys.stdin.readline().rstrip('\n').split()
     else:
         return None
 if len(sys.argv) >1:
@@ -30,23 +30,20 @@ if len(sys.argv) >1:
     feeds.enterSource(sys.argv[2],filename)    
 
 feed =feeds.gatherSources(filename)
-choice = ''
- #Redo main loop
-def mainLoop():
-  choice=''
-  while choice !='q':
+ 
+def mainLoop(flag,keyword):
+  choice=[None]
+  while choice[0] !='q':
     if choice == '-s':
         flag = choice[0]
         keyword = choice[1:]
     if(keyword == None):
-        fthread=threading.Thread(target=feeds.feedloop,args=(flag,feed,))
-        fthread.daemon=True
-        fthread.start()
+        feeds.feedloop(flag,feed)
     else:
-        fthread=threading.Thread(target=feeds.feedloop,args=(flag,feed,keyword,))
-        fthread.daemon=True
-        fthread.start()
-    time.sleep(1)
-    choice=input('>').split()
-mainLoop()
-
+       feeds.feedloop,(flag,feed,keyword)
+    choice=inputtimer('>',5)
+    if(choice==None):
+      choice = [None]
+    if(len(choice)==0):
+      choice = [None]
+mainLoop(flag,keyword)

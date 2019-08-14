@@ -24,17 +24,16 @@ def gatherSources(filename):
 
 
 def search(keyword,sources):
+  print("\n"*25)
+  print(" "*50+"|")
+  print(" "*50+"v")
+  print("\n"+" "*45+"Scroll Down")
+  print("\n"*10)
+  os.system('clear')
   for url in sources:
     e  = feedparser.parse(url)
-  while True:
-    for article in range(len(e)):
-        if(keyword in e.entries[article].title):
-          print("\n"*25)
-          print(" "*50+"|")
-          print(" "*50+"v")
-          print("\n"+" "*45+"Scroll Down")
-          print("\n"*10)
-          os.system('clear')
+  for article in range(len(e)):
+    if(keyword in e.entries[article].title):
           print (Fore.WHITE+Style.NORMAL,e.entries[article].title)
           print ("--")
           print (Fore.BLUE+Style.NORMAL,e.entries[article].description)
@@ -43,28 +42,25 @@ def search(keyword,sources):
           print ("--")
           print (e.entries[article].link)
           print ("--------------------------------------------------------------------------------")
-    print("End of results")
-    time.sleep(360)
+  print("End of results")
 def displayloop(sources):
+  print("\n"*25)
+  print(" "*50+"|")
+  print(" "*50+"v")
+  print("\n"+" "*45+"Scroll Down")
+  print("\n"*10)
   for url in sources:
     e  = feedparser.parse(url)
-  while True:
-    print("\n"*25)
-    print(" "*50+"|")
-    print(" "*50+"v")
-    print("\n"+" "*45+"Scroll Down")
-    print("\n"*10)
     os.system('clear')
     for article in range(len(e)):
-          print (Fore.WHITE+Style.NORMAL,e.entries[article].title)
-          print ("--")
-          print (Fore.BLUE+Style.NORMAL,e.entries[article].description)
-          print ("--")
-          print (Style.DIM,e.entries[article].published)
-          print ("--")
-          print (e.entries[article].link)
-          print ("--------------------------------------------------------------------------------")
-    time.sleep(5)
+      print (Fore.WHITE+Style.NORMAL,e.entries[article].title)
+      print ("--")
+      print (Fore.BLUE+Style.NORMAL,e.entries[article].description)
+      print ("--")
+      print (Style.DIM,e.entries[article].published)
+      print ("--")
+      print (e.entries[article].link)
+      print ("--------------------------------------------------------------------------------")
 def feedloop(flag,feed,keyword=None):
   if keyword == None:
     displayloop(feed)
