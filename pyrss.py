@@ -25,7 +25,9 @@ def inputtimer(prompt,timeout):
 if len(sys.argv) >1:
   flag = sys.argv[1]
   if(flag=='-s'):
-     keyword=sys.argv[2:]
+     keyword=str(sys.argv[2:])
+     keyword = keyword.lower()
+     print(keyword)
   if(flag=='-a'):
     feeds.enterSource(sys.argv[2],filename)    
 

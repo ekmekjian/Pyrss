@@ -33,7 +33,7 @@ def search(keyword,sources):
   for url in sources:
     e  = feedparser.parse(url)
   for article in range(len(e)):
-    if(keyword in e.entries[article].title):
+    if(e.entries[article].title.lower().find(keyword)!=-1):
           print (Fore.WHITE+Style.NORMAL,e.entries[article].title)
           print ("--")
           print (Fore.BLUE+Style.NORMAL,e.entries[article].description)
