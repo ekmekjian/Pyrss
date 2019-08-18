@@ -25,27 +25,27 @@ def inputtimer(prompt,timeout):
 if len(sys.argv) >1:
   flag = sys.argv[1]
   if(flag=='-s'):
-     keyword=str(sys.argv[2:])
+     keyword=str(' '.join(sys.argv[2:]))
      keyword = keyword.lower()
-     print(keyword)
   if(flag=='-a'):
     feeds.enterSource(sys.argv[2],filename)    
 
 feed =feeds.gatherSources(filename)
  
 def mainLoop(flag,keyword):
-  choice=[None]
-  while choice[0] !='q':
-    if choice == '-s':
-        flag = choice[0]
-        keyword = choice[1:]
+  while flag !='q':
     if(keyword == None):
-        feeds.feedloop(flag,feed)
-    else:
-       feeds.feedloop,(flag,feed,keyword)
-    choice=inputtimer('>',5)
+      feeds.feedloop(flag,feed)
+    elif(flag=='-s'):
+      feeds.feedloop(flag,feed,keyword)
+    elif(flag=='-d'):
+      feeds.feedloop(flag,feed)
+    choice=inputtimer('>',10)
     if(choice==None):
       choice = [None]
-    if(len(choice)==0):
+    elif(len(choice)==0):
       choice = [None]
+    else:
+      flag = choice[0]
+      keyword = ' '.join(choice[1:])
 mainLoop(flag,keyword)

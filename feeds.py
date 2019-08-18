@@ -29,11 +29,11 @@ def search(keyword,sources):
   print(" "*50+"v")
   print("\n"+" "*45+"Scroll Down")
   print("\n"*10)
-  os.system('clear')
   for url in sources:
     e  = feedparser.parse(url)
+    os.system('clear')
   for article in range(len(e)):
-    if(e.entries[article].title.lower().find(keyword)!=-1):
+    if(keyword in e.entries[article].title.lower()):
           print (Fore.WHITE+Style.NORMAL,e.entries[article].title)
           print ("--")
           print (Fore.BLUE+Style.NORMAL,e.entries[article].description)
