@@ -47,5 +47,5 @@ def mainLoop(flag,keyword):
       choice = [None]
     else:
       flag = choice[0]
-      keyword = ' '.join(choice[1:])
+      keyword = ' '.join(choice[1:]) if choice[1] != None else None
 mainLoop(flag,keyword)
