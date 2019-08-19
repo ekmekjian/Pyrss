@@ -32,16 +32,16 @@ def search(keyword,sources):
   for url in sources:
     e  = feedparser.parse(url)
     os.system('clear')
-  for article in range(len(e)):
-    if(keyword in e.entries[article].title.lower()):
-          print (Fore.WHITE+Style.NORMAL,e.entries[article].title)
-          print ("--")
-          print (Fore.BLUE+Style.NORMAL,e.entries[article].description)
-          print ("--")
-          print (Style.DIM,e.entries[article].published)
-          print ("--")
-          print (e.entries[article].link)
-          print ("--------------------------------------------------------------------------------")
+    for article in range(len(e)):
+      if(keyword in e.entries[article].title.lower()):
+            print (Fore.WHITE+Style.NORMAL,e.entries[article].title)
+            print ("--")
+            print (Fore.BLUE+Style.NORMAL,e.entries[article].description)
+            print ("--")
+            print (Style.DIM,e.entries[article].published)
+            print ("--")
+            print (e.entries[article].link)
+            print ("--------------------------------------------------------------------------------")
   print("End of results")
 def displayloop(sources):
   print("\n"*25)
