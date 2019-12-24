@@ -40,7 +40,7 @@ def mainLoop(flag,keyword):
       feeds.feedloop(flag,feed,keyword)
     elif(flag=='-d'):
       feeds.feedloop(flag,feed)
-    choice=inputtimer('>',10)
+    choice=inputtimer('>',360)
     if(choice==None):
       choice = [None]
     elif(len(choice)==0):
