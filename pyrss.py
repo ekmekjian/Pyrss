@@ -49,4 +49,20 @@ if len(sys.argv) >1:
   enterSource(sys.argv)    
 feed = gatherSources()
  
-
+def mainLoop(flag,keyword):
+  while flag !='q':
+    if(keyword == None):
+      feeds.feedloop(flag,feed)
+    elif(flag=='-s'):
+      feeds.feedloop(flag,feed,keyword)
+    elif(flag=='-d'):
+      feeds.feedloop(flag,feed)
+    choice=inputtimer('>',10)
+    if(choice==None):
+      choice = [None]
+    elif(len(choice)==0):
+      choice = [None]
+    else:
+      flag = choice[0]
+      keyword = ' '.join(choice[1:]) if choice[1] != None else None
+mainLoop(flag,keyword)
