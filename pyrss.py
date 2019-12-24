@@ -49,14 +49,5 @@ if len(sys.argv) >1:
   enterSource(sys.argv)    
 feed = gatherSources()
  
-def mainLoop(): 
-  while True:
-    print("\n"*25)
-    print(" "*50+"|")
-    print(" "*50+"v")
-    print("\n"+" "*45+"Scroll Down")
-    print("\n"*10)
-    os.system('clear')
-    displayFeed(feed)
-    time.sleep(360)
+
 mainLoop()
