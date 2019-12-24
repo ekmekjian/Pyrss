@@ -1,53 +1,36 @@
 #!/usr/bin/env python
 
-# Next steps:
+# Main steps:
 # 1) Create a main loop for the program - done
 # 2) Utilize the time function to update feed - done
 # 3) Test with more sources - done
 # 4) Create check methods to allow for more arguments-done
 #    A) Allow the ability to add sources through argument - to be tested-done
 # Project marked completed 6/10/2019
-
-import feedparser
-import time
-import sys
-import os
-import colorama
-from colorama import Style,Back,Fore
+# Next steps:
+#pressing 's' to search for titles for keywords
+import threading,sys,select,os,time,feedparser,colorama
+import feeds
 filename = "source.txt"
-#adding one or more source to source.txt
-def enterSource(argu):
-  f = open(filename,"a+")
-  if len(argu)>2:
-    
-    for i in range(1,len(argu)):
-      f.write(argu[i]+"\n")
-  else:
-    f.write(argu[1]+"\n")
-# Read sources from txt file
-def gatherSources():
-  source =[]
-  with open(filename,"r") as f:
-     for line in f:
-       source.append(line.rstrip())
-  return source     
-
-def displayFeed(sources):
-  for url in sources:
-    e  = feedparser.parse(url)
-    for article in range(len(e)):
-      print Fore.WHITE+Style.NORMAL+e.entries[article].title
-      print "--"
-      print Fore.BLUE+Style.NORMAL+e.entries[article].description
-      print "--"
-      print Style.DIM+e.entries[article].published
-      print "--"
-      print e.entries[article].link
-      print "--------------------------------------------------------------------------------"
-  
+keyword = None
+flag=''
+def inputtimer(prompt,timeout):
+    sys.stdout.write(prompt)
+    sys.stdout.flush()
+    ready,_,_=select.select([sys.stdin],[],[],timeout)
+    if ready:
+        return sys.stdin.readline().rstrip('\n').split()
+    else:
+        return None
 if len(sys.argv) >1:
-  enterSource(sys.argv)    
-feed = gatherSources()
+  flag = sys.argv[1]
+  if(flag=='-s'):
+     keyword=str(' '.join(sys.argv[2:]))
+     keyword = keyword.lower()
+  if(flag=='-a'):
+    feeds.enterSource(sys.argv[2],filename)    
+
+feed =feeds.gatherSources(filename)
  
 def mainLoop(flag,keyword):
   while flag !='q':
