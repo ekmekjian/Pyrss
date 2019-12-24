@@ -50,4 +50,3 @@ if len(sys.argv) >1:
 feed = gatherSources()
  
 
-mainLoop()
